@@ -1,13 +1,16 @@
 [tool.poetry]
-name = "yandex-summarization"
+name = "yandex-summarizator"
 version = "0.1.0"
-description = "Task for the second stage of selection"
-authors = ["Your Name <you@example.com>"]
+description = "Project for the second stage of SiriusAI selection"
+authors = ["Alicorn757 <131530695+Alicorn757@users.noreply.github.com>"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
+vosk = "^0.3.45"
+mistralai = "^1.1.0"
+fake-useragent = "^1.5.1"
 
 
 [build-system]
