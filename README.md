@@ -12,37 +12,32 @@
 
 ---
 ## Документация:
+
+### Основные параметры
 ```Python
-# -*- coding: utf-8 -*-
-# pipeline
+from yandex_summarize import YaSummarizator, MISTRAL_API_KEY
 
-from yandex_summarize import YaDiskAPI, Summarizer, convert_wav, AudioRecognizer
-from yandex_summarize.config import MISTRAL_API_KEY
-import os
+example_url = "https://disk.yandex.ru/i/27Um31l3onCzlg"
 
-summarize_model_config = {
-    "API_KEY": MISTRAL_API_KEY,
-    "model_name": "llm",
+model_config = {
+    "stt_model": "vosk",        # whisper
+    "summarize_model": "llm",   # summarizator
+    "API_KEY": MISTRAL_API_KEY, # HG_TOKEN
 }
+```
 
-stt_model_config = {
-    "API_KEY": None,
-    "model_name": "vosk",
-}
+### With context manager
+```Python
+with YaSummarizator( model_config ) as ya_summarizator:
+    ya_summarizator.get_video( example_url ) 
+    print( ya_summarizator.summarize() )
+```
 
-video = YaDiskAPI()
-audio = AudioRecognizer(stt_model_config)
-summarize_model = Summarizer(summarize_model_config)
+### Without context manager:
+```Python
+ya_summarizator = YaSummarizator( model_config )
+ya_summarizator.get_video( example_url ) 
+print( ya_summarizator.summarize() )
 
-audio.load_model()
-video.get_video("https://disk.yandex.ru/i/27Um31l3onCzlg")
-video.save_video("video.mp4")
-
-video_name = convert_wav(os.path.abspath("video.mp4"))
-
-audio.file_open(video_name)
-text = audio.recognize()
-summarize_text = summarize_model.summarize(text)
-
-print(summarize_text)
+ya_summarizator.close()
 ```

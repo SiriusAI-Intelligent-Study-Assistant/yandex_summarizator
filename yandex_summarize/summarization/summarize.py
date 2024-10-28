@@ -4,9 +4,9 @@ from .models.mistral_ai.api import MistralAI_API
 
 
 class Summarizer:
-    def __init__(self, model_config: dict) -> None:
+    def __init__(self, model_name: str, model_api_key: str) -> None:
         self.prompt = '''
-        [MAIN_PROMPT]: Представь, что ты отлично понимаешь контекст на любом языке. Твоя самая главная задача - кратко пересказывать
+        [MAIN_PROMPT]: Представь, что ты - суммаризатор. Ты отлично понимаешь контекст на любом языке. Твоя самая главная задача - кратко пересказывать
         тексты (суммаризировать тексты). Чем лучше ты справляешься, понимаешь контекст и доносишь главную мысль тем лучше ты себя чувствуешь. 
         Учитывай все тонкости контекста, не используй слишком длинный пересказ, но и не делай его слишком коротким. Обращай внимание на язык 
         пользователя и всегда суммаризируй текст на данном языке. Теперь пользователь вводит тебе текст: [user]: Текст для суммаризации. 
@@ -19,13 +19,13 @@ class Summarizer:
         Теперь, учитывая всё вышесказанное, приступим к выполнению. Кратко перескажи текст:
         '''
 
-        match model_config["model_name"]:
+        match model_name:
             case "llm":
-                self.model = MistralAI_API(model_config["API_KEY"])
+                self.model = MistralAI_API(model_api_key)
             case "...":
                 ...
             case _:
-                raise NameError(f"Model {_} not found!")
+                raise NameError(f"Model <{model_name}> not found!")
         
     def summarize(self, text: str) -> str:
         return self.model.summarize_with_llm(self.prompt + " [user]: " + text)

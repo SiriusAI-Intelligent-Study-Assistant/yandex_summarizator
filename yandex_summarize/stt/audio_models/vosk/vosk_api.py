@@ -39,6 +39,7 @@ class VoskAudioModel:
     # Распознавание речи
     def recognize(self) -> str:
         text = str()
+        logging.info("Transcribing audio file...")
 
         while True:
             data = self.wf.readframes(4000)
@@ -47,6 +48,8 @@ class VoskAudioModel:
             if self.rec.AcceptWaveform(data):
                 result = json.loads(self.rec.Result())
                 text += result['text']
-        
+
+        self.wf.close()
+    
         logging.info(f'Audio file recognized: "{text}"')
         return text

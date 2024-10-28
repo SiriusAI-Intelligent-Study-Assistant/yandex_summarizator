@@ -8,10 +8,10 @@ class AudioRecognizer:
     Audio models inference
     '''
 
-    def __init__(self, model_config: dict) -> None:
-        match model_config["model_name"]:
+    def __init__(self, model_name: str) -> None:
+        match model_name:
             case "vosk": self.model = VoskAudioModel()
-            case _: raise NameError("Invalid model name")
+            case _: raise NameError(f"Model <{model_name}> not found!")
 
     def load_model(self) -> None:
         self.model.load()

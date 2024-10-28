@@ -13,10 +13,7 @@ logging.basicConfig(handlers=(file_log, console_out),
 
 locale.getpreferredencoding = lambda: "UTF-8"
 
-from .summarization.summarize import Summarizer
-from .video2audio import convert_wav
-from .get_video import YaDiskAPI
-from .stt.stt import AudioRecognizer
+from .pipeline import YaSummarizator
 from .config import *
 
 __version__ = "0.1.0"
