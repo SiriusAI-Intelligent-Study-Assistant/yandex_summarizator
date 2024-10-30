@@ -13,6 +13,9 @@
 ---
 ## Документация:
 
+### Для корректной работы программы требуется `ffmpeg`: https://www.ffmpeg.org/
+
+---
 ### Основные параметры:
 ```Python
 from yandex_summarize import YaSummarizator, MISTRAL_API_KEY
