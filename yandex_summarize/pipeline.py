@@ -15,9 +15,11 @@ class YaSummarizator:
     def __init__(self, model_config: dict) -> None:
         self.video = YaDiskAPI()
         self.summarize_model = Summarizer(model_config["summarize_model"], 
-                                          model_config['API_KEY'])
+                                          model_config['API_KEY'],
+                                          model_config['DEVICE'])
         
-        self.audio = AudioRecognizer(model_config["stt_model"])
+        self.audio = AudioRecognizer(model_config["stt_model"], 
+                                     model_config['DEVICE'])
         self.audio.load_model()
 
     def __enter__(self) -> object:
@@ -37,15 +39,18 @@ class YaSummarizator:
                    and not(os.path.exists(self.audio_name)) else False
 
     def get_video(self, url: str, _video_name: str = "video.mp4") -> None:
+        if not os.path.exists(self._get_temp_path()):
+            os.mkdir(self._get_temp_path())
+            
         self._video_name = _video_name
         self.video.get_video(url)
         self.video.save_video(self._get_temp_path() + self._video_name)
         self.audio_name = convert_wav(self._get_temp_path() + self._video_name)
         self.audio.file_open(self.audio_name)
         
-    def summarize(self) -> str:
+    def summarize(self, *args, **kwargs) -> str:
         self.text = self.audio.recognize()
-        self.summarize_text = self.summarize_model.summarize(self.text)
+        self.summarize_text = self.summarize_model.summarize(self.text, *args, **kwargs)
         
         return self.summarize_text
     

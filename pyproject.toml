@@ -8,9 +8,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-vosk = "^0.3.45"
-mistralai = "^1.1.0"
-fake-useragent = "^1.5.1"
 
 
 [build-system]

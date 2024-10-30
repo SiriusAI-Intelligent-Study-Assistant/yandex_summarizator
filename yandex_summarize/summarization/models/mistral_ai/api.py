@@ -2,6 +2,8 @@
 # https://mistral.ai/
 
 from mistralai import Mistral
+import logging
+
 
 class MistralAI_API:
     '''
@@ -24,4 +26,5 @@ class MistralAI_API:
         )
             
         self.answer = self.chat_response.choices[0].message.content
+        logging.info("Summarization has been successfully completed! Model: 'Mistral_Large'; LLM.")
         return self.answer

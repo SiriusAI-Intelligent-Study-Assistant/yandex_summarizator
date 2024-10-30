@@ -2,6 +2,3 @@
 __pycache__/
 .env
 logs.log
-tiny.pt
-test_60.wav
-test_600.wav

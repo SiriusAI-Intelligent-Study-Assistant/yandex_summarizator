@@ -15,6 +15,7 @@ class VoskAudioModel:
     def __init__(self, model_path: str = "vosk-model-small-ru-0.22") -> None:
         self.model_path = os.path.abspath(model_path).replace(model_path, 
                                                               '\\'.join(__name__.split('.')[:-1]) + '\\' + model_path)
+        logging.info(f"Model initialized: {self.model_path}")
     
     # Загрузка модели
     def load(self) -> None:
