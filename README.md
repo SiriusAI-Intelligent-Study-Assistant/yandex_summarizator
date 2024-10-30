@@ -89,7 +89,7 @@ ya_summarizator.close()
 ### `DEVICE` 
 - `cpu` - по умолчанию
 
-- `cuda` - для использования **GPU**, необходимо установить **CUDA**: `pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121`. https://pytorch.org/
+- `cuda` - для использования **GPU**, необходимо установить **CUDA**: `pip3 install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu121 --force-reinstall`. https://pytorch.org/
 
 ---
 ## Параметры `summarize`:

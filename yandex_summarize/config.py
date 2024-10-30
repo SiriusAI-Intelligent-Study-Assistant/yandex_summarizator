@@ -14,6 +14,9 @@ logging.basicConfig(handlers=(file_log, console_out),
 
 locale.getpreferredencoding = lambda: "UTF-8"
 
+# Игнорирование предупреждений
+import warnings
+warnings.filterwarnings("ignore")
 
 # API-ключи
 from dotenv import load_dotenv

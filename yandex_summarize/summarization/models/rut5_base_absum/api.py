@@ -33,7 +33,7 @@ class RuT5_API:
             text = '[{}] '.format(n_words) + text
         elif compression:
             text = '[{0:.1g}] '.format(compression) + text
-        print(self.model.device)
+
         x = self.tokenizer(text, return_tensors='pt', padding=True).to(self.model.device)
         with torch.inference_mode():
             out = self.model.generate(
